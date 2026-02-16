@@ -31,19 +31,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: 'esbuild',
-    rollupOptions: {
-      output: {
-        // CRITICAL: Disable chunk splitting to prevent loading errors
-        manualChunks: undefined,
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-      }
-    },
-    chunkSizeWarningLimit: 2000,
-    // Prevent chunk loading errors
-    assetsInlineLimit: 4096
+    emptyOutDir: true,
   },
   optimizeDeps: {
     exclude: ['lucide-react'],
