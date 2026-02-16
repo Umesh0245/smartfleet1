@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production';
 
   return {
+    base: '/',
     plugins: [react()],
     server: {
       port: 5173,
