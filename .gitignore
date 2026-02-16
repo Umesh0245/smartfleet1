@@ -1,0 +1,20 @@
+# Environment configuration
+*.env
+!.env.example
+
+# Logs
+*.log
+logs/
+backend/logs/
+
+# Build and dependencies
+**/node_modules/
+**/target/
+**/dist/
+venv/
+__pycache__/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store

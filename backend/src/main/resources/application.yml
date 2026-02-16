@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: smartfleet-backend
+
+  datasource:
+    # Cross-platform database configuration
+    # macOS (Postgres.app): port 5434, user is system username, no password
+    # Windows (Docker): port 5432, user postgres, password postgres
+    url: jdbc:postgresql://${DB_HOST:${SPRING_DATASOURCE_HOST:localhost}}:${DB_PORT:${SPRING_DATASOURCE_PORT:5434}}/${DB_NAME:${SPRING_DATASOURCE_DB:fleetdb}}
+    username: ${DB_USER:${SPRING_DATASOURCE_USERNAME:umeshreddy}}
+    password: ${DB_PASSWORD:${SPRING_DATASOURCE_PASSWORD:}}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: ${SPRING_KAFKA_CONSUMER_GROUP:smartfleet-telemetry-consumer}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+      password: ${SPRING_REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+# Custom Kafka configuration
+kafka:
+  enabled: ${KAFKA_ENABLED:true}
+
+# Custom Redis configuration  
+redis:
+  enabled: ${REDIS_ENABLED:true}
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG
